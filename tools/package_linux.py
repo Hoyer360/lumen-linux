@@ -20,8 +20,8 @@ def main():
     args = ap.parse_args(); args.output.mkdir(parents=True, exist_ok=True)
     folders = ['linux_maker','p1401','upstream','packaging','bin','native/cpu','tests_linux','docs/verification','tools/helper_qemu','licenses','tests/native']
     if args.include_driver: folders.append('assets')
-    paths = [ROOT / n for n in ('lumen','README.md','LICENSE','NOTICE.md','LINUX-TOOLS.json','UPSTREAM-BASELINE.json','requirements.txt','requirements-dev.txt')]
-    paths += [ROOT / 'tools' / n for n in ('install_linux.py','package_linux.py','setup_linux.sh','build_cpu_helper_linux.py','fetch_assets.py')]
+    paths = [ROOT / n for n in ('lumen','README.md','README.zh-CN.md','LICENSE','NOTICE.md','LINUX-TOOLS.json','UPSTREAM-BASELINE.json','requirements.txt','requirements-dev.txt')]
+    paths += [ROOT / 'tools' / n for n in ('install_linux.py','package_linux.py','setup_linux.sh','build_cpu_helper_linux.py','fetch_assets.py','package_run.py')]
     paths += [ROOT / 'docs/LINUX-FEATURES.md']
     for folder in folders:
         paths.extend(p for p in (ROOT / folder).rglob('*') if p.is_file() and not any(x in {'__pycache__','OCK_Files','Results','.git'} for x in p.parts))
