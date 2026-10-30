@@ -1,0 +1,11 @@
+{
+  "iasl": {
+    "url": "https://raw.githubusercontent.com/corpnewt/linux_iasl/977868eb67698a0e1632c53cff6b7bcfa19a2f1a/iasl.zip",
+    "archive_sha256": "618d35e4948ad765a1d66227b0887f8baa483f8e4460183de466b45217612aeb",
+    "sha256": "64d529126eb0c0b5ff6a656acaa5374850a2ddfa1c003c4c2ccf3432d6782dd7"
+  },
+  "macserial.linux": {
+    "source": "OpenCore 1.0.8; Windows 2.6.4 BUILD-MANIFEST.json",
+    "sha256": "3aaf4e64bad2d8cebdf545235b7eba93e28764cc61e49249c850494a6ccad8dc"
+  }
+}

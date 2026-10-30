@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+dist/
+out/
+build/
+assets/*
+!assets/README.md
+upstream/OpCore-Simplify/OCK_Files/
+upstream/OpCore-Simplify/Results/

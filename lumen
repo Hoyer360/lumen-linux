@@ -1,0 +1,16 @@
+#!/bin/sh
+set -eu
+lumen_source=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+lumen_data=${LUMEN_HOME:-${XDG_DATA_HOME:-$HOME/.local/share}/lumen}
+if [ "${LUMEN_SKIP_UPDATE:-0}" != 1 ] && [ -f "$lumen_data/current/linux_maker/__main__.py" ]; then
+    lumen_source=$(readlink -f "$lumen_data/current")
+fi
+if [ -x "$(dirname -- "$0")/.venv/bin/python" ]; then
+    lumen_python="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)/.venv/bin/python"
+elif [ -x "$lumen_data/venv/bin/python" ]; then
+    lumen_python="$lumen_data/venv/bin/python"
+else
+    lumen_python=python3
+fi
+cd "$lumen_source"
+exec "$lumen_python" -E -s -B -m linux_maker "$@"

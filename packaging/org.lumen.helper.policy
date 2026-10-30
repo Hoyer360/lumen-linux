@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE policyconfig PUBLIC "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN" "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
+<policyconfig>
+  <vendor>Lumen Linux</vendor>
+  <action id="org.lumen.helper">
+    <description>Read firmware or prepare the selected installation USB</description>
+    <description xml:lang="zh_CN">读取固件或准备所选安装 U 盘</description>
+    <message>Authentication is required for Lumen to access firmware or the selected USB device.</message>
+    <message xml:lang="zh_CN">Lumen 需要授权以访问固件或所选 U 盘。</message>
+    <defaults><allow_any>no</allow_any><allow_inactive>no</allow_inactive><allow_active>auth_admin</allow_active></defaults>
+    <annotate key="org.freedesktop.policykit.exec.path">/usr/libexec/lumen-helper</annotate>
+  </action>
+</policyconfig>

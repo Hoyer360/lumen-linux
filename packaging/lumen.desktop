@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Lumen macOS Installer
+Name[zh_CN]=Lumen macOS 制作器
+Comment=Build and verify a macOS recovery USB on Linux
+Comment[zh_CN]=在 Linux 上构建并校验 macOS 恢复安装介质
+Exec=lumen
+Icon=drive-removable-media
+Terminal=false
+Categories=System;Utility;
+StartupNotify=true

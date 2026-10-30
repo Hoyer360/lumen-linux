@@ -1,0 +1,58 @@
+{
+  "date": "2026-10-31",
+  "environment": "Arch Linux x86_64 / WSL2, Python 3.14.8, Qt 6.12.0",
+  "builds": {
+    "linux-optiplex": {
+      "ok": true,
+      "macos_version": "24.99.99",
+      "report_sha256": "a5cd93e52f87d62781f5c246185135362228d81494b0455422bbcf4e529e2bc9",
+      "validation": {
+        "ok": true,
+        "ocvalidate": {
+          "ok": true,
+          "issues": 0,
+          "text": "NOTE: This version of ocvalidate is only compatible with OpenCore version 1.0.9!\n\n\nCompleted validating config.plist in 1 ms. No issues found."
+        },
+        "invariants": [],
+        "error": ""
+      }
+    },
+    "linux-x570": {
+      "ok": true,
+      "macos_version": "25.99.99",
+      "report_sha256": "b96bc8ac204e076813e79205c9f3a2f83743ef567202301a65b78586d5557914",
+      "validation": {
+        "ok": true,
+        "ocvalidate": {
+          "ok": true,
+          "issues": 0,
+          "text": "NOTE: This version of ocvalidate is only compatible with OpenCore version 1.0.9!\n\n\nCompleted validating config.plist in 0 ms. No issues found."
+        },
+        "invariants": [],
+        "error": ""
+      }
+    }
+  },
+  "recovery": {
+    "com.apple.recovery.boot/BaseSystem.chunklist": {
+      "sha256": "06f7c498f856341f467ba1faedf2717fb2c172ae0aff4658a1467cbf46b711f9",
+      "size": 3604
+    },
+    "com.apple.recovery.boot/BaseSystem.dmg": {
+      "sha256": "edddd0d5869caaa12e29e6996a04f11590280580976a119dbd42c24fa62fe18e",
+      "size": 960530321
+    }
+  },
+  "image": {
+    "logical_bytes": 4294967296,
+    "payload_bytes": 998009628,
+    "file_readback_verified": true,
+    "qemu_uefi": "OpenCore Boot Menu reached; LUMEN (external) (dmg) visible",
+    "macos_installation_tested": false,
+    "physical_usb_tested": false
+  },
+  "desktop": {
+    "offscreen_smoke": true,
+    "xcb_wslg_smoke": true
+  }
+}

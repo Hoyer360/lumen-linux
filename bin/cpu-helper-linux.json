@@ -1,0 +1,9 @@
+{
+  "schema": "lumen-cpu-helper/1",
+  "sha256": "4b37c0713097a87fa6784cb894725c6730942fd0c2c62d7f44b980cae36a3b3b",
+  "platform": "linux-x86_64",
+  "source": [
+    "native/cpu/nm_cpuinfo_core.c",
+    "native/cpu/nm_cpuinfo_linux.c"
+  ]
+}

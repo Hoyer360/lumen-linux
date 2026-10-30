@@ -1,0 +1,39 @@
+{
+  "date": "2026-10-31",
+  "linux_tests": {
+    "run": 92,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "real_image_tools": true
+  },
+  "upstream_tests": {
+    "run": 767,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 11
+  },
+  "helper_guest": {
+    "logical_sector_bytes": [
+      512,
+      4096
+    ],
+    "actual_block_device_commands": true,
+    "root_protected": true,
+    "user_write": true,
+    "readonly_readback": true,
+    "session_cleanup": true,
+    "host_physical_disks_used": false
+  },
+  "desktop": {
+    "offscreen": true,
+    "xcb_wslg": true,
+    "languages": [
+      "en",
+      "zh-CN"
+    ]
+  },
+  "physical_usb_tested": false,
+  "native_acpi_tested": false,
+  "macos_installation_and_driver_tested": false
+}

@@ -1,0 +1,44 @@
+c[?7l[2J[0mSeaBIOS (version Arch Linux 1.17.0-2-2)
+Booting from ROM...
+Probing EDD (edd=off to disable)... oc[?7l[2J[    0.077565] virt/tdx: TDX not supported by the host platform
+GUEST_START
+HELPER disks RC 0 {"ok": true, "disks": [{"path": "/dev/sda", "major_minor": "8:0", "mountpoints": [], "type": "disk", "tran": "usb", "model": "QEMU HARDDISK", "serial": "", "wwn": "", "fstype": "", "parttype": "", "partuuid": "", "pkname": "", "metadata_error": null, "size": 5368709120, "read_only": false, "removable": false, "logical_sector": 4096, "sysfs_path": "/sys/devices/pci0000:00/0000:00:02.0/usb2/2-1/2-1:1.0/host6/target6:0:0/6:0:0:0/block/sda", "diskseq": "2", "partitions": [{"path": "/dev/sda1", "major_minor": "8:1", "size": 5301600256, "type": "part", "fstype": "vfat", "parttype": "0xc", "partuuid": "21073290-01", "mountpoints": []}], "os_partitions": [], "protected": false, "reasons": [], "requires_large_confirmation": false, "requires_os_confirmation": false, "identity": {"path": "/dev/sda", "major_minor": "8:0", "size": 5368709120, "model": "QEMU HARDDISK", "serial": "", "wwn": "", "sysfs_path": "/sys/devices/pci0000:00/0000:00:02.0/usb2/2-1/2-1:1.0/host6/target6:0:0/6:0:0:0/block/sda", "diskseq": "2", "logical_sector": 4096}, "fingerprint": "f546e12e6f36c288860163da6dac55fda216bf26baa9235a368f31cbfe9de80f", "eligible": true}, {"path": "/dev/vda", "major_minor": "254:0", "mountpoints": ["/"], "type": "disk", "tran": "virtio", "model": "", "serial": "", "wwn": "", "fstype": "ext4", "parttype": "", "partuuid": "", "pkname": "", "metadata_error": null, "size": 1073741824, "read_only": false, "removable": false, "logical_sector": 512, "sysfs_path": "/sys/devices/pci0000:00/0000:00:03.0/virtio0/block/vda", "diskseq": "1", "partitions": [], "os_partitions": ["/dev/vda"], "protected": true, "reasons": ["contains a mounted operating-system or encrypted filesystem", "contains active system mount /", "is used by the running system or its swap", "device is not connected through USB", "device is smaller than the required 4 GiB"], "requires_large_confirmation": false, "requires_os_confirmation": true, "identity": {"path": "/dev/vda", "major_minor": "254:0", "size": 1073741824, "model": "", "serial": "", "wwn": "", "sysfs_path": "/sys/devices/pci0000:00/0000:00:03.0/virtio0/block/vda", "diskseq": "1", "logical_sector": 512}, "fingerprint": "15eafd048183469dafdcede52ff661dd8e5c0d99a7f6693c55fa64134f36fb9b", "eligible": false}]}
+
+INVENTORY [{"path": "/dev/sda", "major_minor": "8:0", "mountpoints": [], "type": "disk", "tran": "usb", "model": "QEMU HARDDISK", "serial": "", "wwn": "", "fstype": "", "parttype": "", "partuuid": "", "pkname": "", "metadata_error": null, "size": 5368709120, "read_only": false, "removable": false, "logical_sector": 4096, "sysfs_path": "/sys/devices/pci0000:00/0000:00:02.0/usb2/2-1/2-1:1.0/host6/target6:0:0/6:0:0:0/block/sda", "diskseq": "2", "partitions": [{"path": "/dev/sda1", "major_minor": "8:1", "size": 5301600256, "type": "part", "fstype": "vfat", "parttype": "0xc", "partuuid": "21073290-01", "mountpoints": []}], "os_partitions": [], "protected": false, "reasons": [], "requires_large_confirmation": false, "requires_os_confirmation": false, "identity": {"path": "/dev/sda", "major_minor": "8:0", "size": 5368709120, "model": "QEMU HARDDISK", "serial": "", "wwn": "", "sysfs_path": "/sys/devices/pci0000:00/0000:00:02.0/usb2/2-1/2-1:1.0/host6/target6:0:0/6:0:0:0/block/sda", "diskseq": "2", "logical_sector": 4096}, "fingerprint": "f546e12e6f36c288860163da6dac55fda216bf26baa9235a368f31cbfe9de80f", "eligible": true}, {"path": "/dev/vda", "major_minor": "254:0", "mountpoints": ["/"], "type": "disk", "tran": "virtio", "model": "", "serial": "", "wwn": "", "fstype": "ext4", "parttype": "", "partuuid": "", "pkname": "", "metadata_error": null, "size": 1073741824, "read_only": false, "removable": false, "logical_sector": 512, "sysfs_path": "/sys/devices/pci0000:00/0000:00:03.0/virtio0/block/vda", "diskseq": "1", "partitions": [], "os_partitions": ["/dev/vda"], "protected": true, "reasons": ["contains a mounted operating-system or encrypted filesystem", "contains active system mount /", "is used by the running system or its swap", "device is not connected through USB", "device is smaller than the required 4 GiB"], "requires_large_confirmation": false, "requires_os_confirmation": true, "identity": {"path": "/dev/vda", "major_minor": "254:0", "size": 1073741824, "model": "", "serial": "", "wwn": "", "sysfs_path": "/sys/devices/pci0000:00/0000:00:03.0/virtio0/block/vda", "diskseq": "1", "logical_sector": 512}, "fingerprint": "15eafd048183469dafdcede52ff661dd8e5c0d99a7f6693c55fa64134f36fb9b", "eligible": false}]
+BLKID_PROBE {
+   "blockdevices": [
+      {
+         "name": "/dev/sda",
+         "fstype": null,
+         "parttype": null,
+         "partuuid": null,
+         "children": [
+            {
+               "name": "/dev/sda1",
+               "fstype": "vfat",
+               "parttype": "0xc",
+               "partuuid": "21073290-01"
+            }
+         ]
+      },{
+         "name": "/dev/vda",
+         "fstype": "ext4",
+         "parttype": null,
+         "partuuid": null
+      }
+   ]
+}
+
+HELPER prepare RC 0 {"ok": true, "token": "<session-token>", "mountpoint": "/run/lumen/<session-token>/media", "device": "/dev/sda"}
+
+HELPER readback RC 0 {"ok": true, "token": "<session-token>", "mountpoint": "/run/lumen/<session-token>/media", "read_only": true, "geometry_verified": true}
+
+READONLY_REFUSAL [Errno 30] Read-only file system: '/run/lumen/<session-token>/media/no-write'
+HELPER sessions RC 0 {"ok": true, "sessions": [{"token": "<session-token>", "mountpoint": "/run/lumen/<session-token>/media", "phase": "readback", "device": "/dev/sda"}]}
+
+HELPER close RC 0 {"ok": true, "closed": true, "sync_warning": null}
+
+HELPER sessions RC 0 {"ok": true, "sessions": []}
+
+LUMEN_HELPER_INTEGRATION_PASS
+[    4.454735] reboot: Power down

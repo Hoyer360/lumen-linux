@@ -1,0 +1,26 @@
+BdsDxe: loading Boot0002 "UEFI QEMU QEMU USB HARDDRIVE 1-0000:00:02.0-1" from PciRoot(0x0)/Pci(0x2,0x0)/USB(0x0,0x0)
+BdsDxe: starting Boot0002 "UEFI QEMU QEMU USB HARDDRIVE 1-0000:00:02.0-1" from PciRoot(0x0)/Pci(0x2,0x0)/USB(0x0,0x0)
+BS: Starting OpenCore application...
+BS: Booter path - \EFI\BOOT\BOOTX64.EFI
+OCFS: Trying to locate filesystem on 7E857A98 7E6EDF98
+OCFS: Filesystem DP - \EFI\BOOT\BOOTX64.EFI
+BS: Trying to load OpenCore image...
+BS: Relative path - EFI
+BS: Startup path - EFI\OpenCore.efi (0)
+BS: Fallback to absolute path - EFI\OC\OpenCore.efi
+BS: Read OpenCore image of 872448 bytes
+OCM: Loaded image at 7E03F818 handle
+OCM: Loaded image has DeviceHandle 7E857A98 FilePath 7E039F98 ours DevicePath 7E03F018
+OCCPU: TSC Adjust 0
+OCCPU: Failed to get FSBFrequency data using Apple Platform Info - Not Found
+OC: Starting OpenCore...
+OC: Booter path - EFI\OC\OpenCore.efi
+OCFS: Trying to locate filesystem on 7E857A98 7E039F98
+OCFS: Filesystem DP - EFI\OC\OpenCore.efi
+OC: Absolute booter path - EFI\OC\OpenCore.efi
+OC: Storage root EFI\OC\OpenCore.efi
+OCST: Missing vault data, ignoring...
+OC: OcMiscEarlyInit...
+OC: Loaded configuration of 45967 bytes
+OC: Got 4 drivers
+OC: Watchdog status is 0

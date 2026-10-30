@@ -1,0 +1,12 @@
+{
+  "scope": "Independent Linux source snapshot; new history",
+  "tests_run": 92,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 1,
+  "skip_reason": "Temporary mkfs.fat/mcopy fixture tools unavailable in this publication session; earlier full integration evidence retained",
+  "gui_smoke": "passed",
+  "engine_tool_hashes": "passed",
+  "driver_and_mac_archives_hosted": false,
+  "apple_images_hosted": false
+}
