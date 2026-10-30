@@ -35,7 +35,7 @@ def trusted_install():
     for entry in (path, *path.parents):
         info = entry.lstat()
         if stat.S_ISLNK(info.st_mode) or info.st_uid != 0 or info.st_mode & 0o022:
-            raise HelperError('Privileged helper installation is writable by a non-root user or uses a link.')
+            raise HelperError(f'Unsafe helper path: {entry} (uid={info.st_uid}, mode={stat.S_IMODE(info.st_mode):04o}); requires root ownership, no group/other write permission, and no symbolic link.')
     package_root = INSTALL_ROOT / 'linux_maker'
     if package_root.is_symlink():
         raise HelperError('Privileged package directory cannot be a symbolic link.')
@@ -44,7 +44,7 @@ def trusted_install():
             item = Path(folder) / name
             info = item.lstat()
             if stat.S_ISLNK(info.st_mode) or info.st_uid != 0 or info.st_mode & 0o022:
-                raise HelperError('Privileged helper module ownership is invalid.')
+                raise HelperError(f'Unsafe helper module: {item} (uid={info.st_uid}, mode={stat.S_IMODE(info.st_mode):04o}); requires root ownership, no group/other write permission, and no symbolic link.')
 
 
 def caller_uid():
