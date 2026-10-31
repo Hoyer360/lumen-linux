@@ -572,7 +572,14 @@ def dump_acpi(destination):
         result = subprocess.run([executable, str(helper)], input=b'{"action":"acpi"}',
                                 capture_output=True, timeout=90)
         if result.returncode:
-            raise PermissionError('ACPI authorization/read failed: ' + result.stderr.decode('utf-8', 'replace')[-300:])
+            detail = result.stderr.decode('utf-8', 'replace').strip()
+            if not detail:
+                try:
+                    detail = json.loads(result.stdout).get('error', '')
+                except (ValueError, AttributeError):
+                    pass
+            detail = str(detail or f'helper exited with status {result.returncode}')[-300:]
+            raise PermissionError('ACPI authorization/read failed: ' + detail)
         if len(result.stdout) > MAX_ACPI_BYTES * 2:
             raise ValueError('privileged ACPI response exceeds limit')
         response = json.loads(result.stdout)

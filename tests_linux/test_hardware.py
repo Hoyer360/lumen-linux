@@ -81,6 +81,19 @@ class Firmware(unittest.TestCase):
             with self.assertRaises(ValueError):
                 hw.acpi_bundle(root)
 
+    def test_acpi_helper_json_error_is_preserved(self):
+        result = subprocess.CompletedProcess([], 1, json.dumps({
+            'ok': False, 'error': 'HelperError: Privileged helper installation is writable by a non-root user or uses a link.'
+        }).encode(), b'')
+        with patch.object(hw, 'acpi_bundle', side_effect=PermissionError('root required')), \
+                patch.object(Path, 'is_file', return_value=True), \
+                patch.object(hw, 'system_tool', return_value='/usr/bin/pkexec'), \
+                patch.object(hw.subprocess, 'run', return_value=result), \
+                patch.object(hw, 'write_acpi_bundle') as write:
+            with self.assertRaisesRegex(PermissionError, 'Privileged helper installation is writable'):
+                hw.dump_acpi('/unused/ACPI')
+            write.assert_not_called()
+
     def test_pci_root_uses_acpi_uid_instead_of_domain(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory) / 'pci0000:40'

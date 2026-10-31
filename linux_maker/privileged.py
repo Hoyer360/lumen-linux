@@ -417,6 +417,8 @@ def dispatch(request, uid, disks):
 
 def main():
     try:
+        # Helper runtime directories must remain trusted under desktop umask 002.
+        os.umask(0o022)
         trusted_install()
         uid = caller_uid()
         # Only the already checked, root-owned installation participates in imports.

@@ -4,6 +4,8 @@ import io
 import json
 import os
 from pathlib import Path
+import shlex
+import subprocess
 import tarfile
 import tempfile
 import unittest
@@ -11,6 +13,7 @@ from unittest.mock import patch
 
 from linux_maker import reports, service, updates
 from p1401 import engine, scan_evidence
+from tools import install_linux
 
 
 def archive(path, version='0.2.0', platform='linux-x86_64'):
@@ -28,6 +31,36 @@ def archive(path, version='0.2.0', platform='linux-x86_64'):
 
 
 class ReviewRegressions(unittest.TestCase):
+    def test_helper_install_normalizes_parent_permissions_with_group_umask(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            previous_umask = os.umask(0o002)
+            try:
+                for existing in (False, True):
+                    if existing:
+                        (root / 'usr/lib/lumen').chmod(0o775)
+                        (root / 'usr/lib/lumen/linux_maker').chmod(0o775)
+                        cache = root / 'usr/lib/lumen/linux_maker/__pycache__'
+                        cache.mkdir(mode=0o775)
+                        (cache / 'hardware.cpython-314.pyc').write_bytes(b'old cache')
+                    with patch('sys.argv', ['install_linux.py', '--destdir', folder]), \
+                            patch('sys.stdout', new_callable=io.StringIO):
+                        install_linux.main()
+                    for directory in ('usr/lib/lumen', 'usr/lib/lumen/linux_maker'):
+                        self.assertEqual((root / directory).stat().st_mode & 0o777, 0o755)
+                    package = root / 'usr/lib/lumen/linux_maker'
+                    self.assertFalse((package / '__pycache__').exists())
+                    # Exercise the launcher's interpreter flags twice: the first
+                    # successful import must not break the next trusted launch.
+                    command = shlex.split((root / 'usr/libexec/lumen-helper').read_text().splitlines()[1])
+                    for _ in range(2):
+                        subprocess.run([*command[1:-2], '-c',
+                                        'import sys; sys.path.insert(0, sys.argv[1]); from linux_maker import hardware, disks',
+                                        str(package.parent)], check=True, capture_output=True)
+                        self.assertFalse((package / '__pycache__').exists())
+            finally:
+                os.umask(previous_umask)
+
     def test_password_bearer_and_ipv6_are_removed_from_log_strings(self):
         cleaned = reports.clean('password=hunter2 IPv6 2001:db8::1234 Authorization: Bearer abcDEF123')
         for secret in ('hunter2', '2001:db8::1234', 'abcDEF123'):

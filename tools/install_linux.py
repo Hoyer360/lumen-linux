@@ -42,6 +42,13 @@ def main():
         return
     install_directory(package.parent)
     install_directory(package)
+    # Older launchers generated caches with the caller's group-writable umask.
+    # Remove them and keep future helper imports from writing bytecode here.
+    bytecode = package / '__pycache__'
+    if bytecode.is_symlink():
+        bytecode.unlink()
+    elif bytecode.exists():
+        shutil.rmtree(bytecode)
     # Do not place a GUI, downloader, arbitrary Python environment or executable request paths in this service.
     names = ['__init__.py', 'disks.py', 'privileged.py', 'hardware.py']
     for name in names:
@@ -60,7 +67,7 @@ def main():
                 raise SystemExit('Refusing linked installation directory: ' + str(parent))
         if not target.parent.exists():
             install_directory(target.parent)
-    wrapper.write_text('#!/bin/sh\nexec /usr/bin/python3 -I /usr/lib/lumen/linux_maker/privileged.py "$@"\n')
+    wrapper.write_text('#!/bin/sh\nexec /usr/bin/python3 -I -B /usr/lib/lumen/linux_maker/privileged.py "$@"\n')
     wrapper.chmod(0o755)
     shutil.copyfile(ROOT / 'packaging/org.lumen.helper.policy', policy); policy.chmod(0o644)
     if args.destdir is None:
