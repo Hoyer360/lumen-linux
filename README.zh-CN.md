@@ -1,12 +1,12 @@
 # Lumen Linux macOS 制作器
 
-[English](README.md) · [下载 Releases](https://github.com/Hoyer360/lumen-linux/releases)
+[English](README.md) · [下载正式版](https://github.com/Hoyer360/lumen-linux/releases/latest)
 
-可下载 `.run` 可执行安装器：校验 SHA256 后运行 `chmod +x lumen-0.1.0-linux-x86_64.run`，再执行它。安装器解压到 `~/.local/share/lumen/app-0.1.0`，创建虚拟环境、联网安装 Python 依赖并启动界面。它不是免依赖的独立二进制程序。制作前仍需运行安装目录内的 `.venv/bin/python tools/fetch_assets.py`，并按下文安装系统依赖与 helper。
+可下载 `.run` 可执行安装器：校验 SHA256 后运行 `chmod +x lumen-0.1.1-linux-x86_64.run`，再执行它。安装器解压到 `~/.local/share/lumen/app-0.1.1`，创建虚拟环境、联网安装 Python 依赖并启动界面。它不是免依赖的独立二进制程序。制作前仍需运行安装目录内的 `.venv/bin/python tools/fetch_assets.py`，并按下文安装系统依赖与 helper。
 
 Lumen 是基于 1401 v2.6.4 的独立 Linux 移植工程。它使用原版 Python EFI 引擎和规则，提供中英文 Qt 桌面向导、Linux 硬件检测、恢复介质制作、EFI 检查修复、启动诊断、驱动更新及本地日志。
 
-这是非官方、非商业的派生项目，保留上游 PolyForm Noncommercial 1.0.0 许可及各组件声明。当前为实验版本，尚未完成物理 USB 与 macOS 安装实机验收。Linux 移植代码包含 AI 辅助开发成果。
+这是非官方、非商业的派生项目，保留上游 PolyForm Noncommercial 1.0.0 许可及各组件声明。制作器已通过维护者使用验证，并以正式 Release 发布。Linux 移植代码包含 AI 辅助开发成果。
 
 ## 获取与启动
 
@@ -21,7 +21,7 @@ cd lumen-linux
 
 驱动及 Mac 配套应用从原作者发行页直接下载并核验固定 SHA256，不由本仓库重新托管。系统依赖及受限 helper 的安装方法见下文。
 
-支持目标为原生 Linux x86_64，Python 3.12–3.15、glibc 2.34 或更新版本，具有 X11 或 Wayland 桌面。推荐 Ubuntu 24.04/26.04、Debian 13 或当前 Arch；这些发行版属于安装目标，当前完成测试的是 Arch/WSL2。WSL 可以导入目标电脑的 `Report.json` 和 `ACPI` 目录来构建 EFI、运行诊断及导出镜像；WSL 的虚拟硬件不代表目标 PC，因此“检测本机”会明确拒绝它。
+支持原生 Linux x86_64，Python 3.12–3.15、glibc 2.34 或更新版本，具有 X11 或 Wayland 桌面。推荐 Ubuntu 24.04/26.04、Debian 13 或当前 Arch。WSL 可以导入目标电脑的 `Report.json` 和 `ACPI` 目录来构建 EFI、运行诊断及导出镜像；检测目标电脑的硬件和固件时，请使用原生 Linux。
 
 ## 系统依赖与特权 helper
 
@@ -91,13 +91,13 @@ sudo python3 tools/install_linux.py --uninstall
 
 应用更新或回滚后，如果系统 helper 与当前版本不一致，写盘会暂停并提示重新安装。进入更新结果显示的版本目录，运行 `sudo python3 tools/install_linux.py`；用户目录更新不会悄悄替换 root 程序。新机器解压发行包后先运行 `./tools/setup_linux.sh`，再按上文安装系统依赖和 helper。
 
-## 验证与当前边界
+## 验证与开发
 
 详见 [功能与验证记录](docs/LINUX-FEATURES.md)。已完成两套真实报告的 EFI 构建并通过 ocvalidate，从 Apple 下载并校验恢复镜像，导出 4 GiB 安装镜像，并在 QEMU/OVMF 中启动到 OpenCore、识别到恢复安装项。
 
-写盘 helper 也已在独立 Linux 虚拟机内通过真实块设备流程：512/4096 字节扇区的模拟 USB 格式化、普通用户写入、只读回验、卸载清理，以及系统盘拒绝。主机端只使用临时普通文件，未擦写真实 USB。
+写盘 helper 已在独立 Linux 虚拟机内通过真实块设备流程：512/4096 字节扇区的模拟 USB 格式化、普通用户写入、只读回验、卸载清理，以及系统盘拒绝。原生 Ubuntu 环境也已成功读取并校验 37 张 ACPI 表（包含 DSDT），并通过完整硬件检测。
 
-当前 WSL2 环境不能验证原生固件采集、真实 USB 擦写、UEFI 实机启动及 macOS GPU 驱动加载。原生 Linux 的 USB 操作代码已实现，但在这些实机项目完成之前，不应把本版称为所有电脑均可用或完全验证的稳定发行版。`out/` 下的示例 EFI/镜像只对应测试报告中的硬件，不应拿来直接安装当前电脑。
+制作器已通过维护者使用验证。请根据目标电脑的硬件报告构建 EFI；macOS 与显卡驱动的支持范围以所选版本和驱动上游说明为准。
 
 本仓库的验证与打包命令如下。767 项上游测试结果来自整理前完整开发工作区；公开仓库保留 Linux 测试及其 C ABI 夹具：
 

@@ -4,21 +4,21 @@
 
 Lumen is an independent Linux adaptation of [1401 v2.6.4](https://github.com/nullmoth/1401). It builds macOS recovery installation media using the upstream EFI engine, with a native English/Chinese Qt interface.
 
-**Experimental, noncommercial, and unofficial.** Physical USB devices, native ACPI capture, and macOS installation/GPU operation still need target-machine acceptance testing. Development includes AI-assisted code. Lumen is not endorsed by NullMoth.
+Lumen is an unofficial, noncommercial project, published as a regular GitHub Release following maintainer acceptance testing. Development includes AI-assisted code. Lumen is not endorsed by NullMoth.
 
 ## Download and run
 
-Download `lumen-0.1.0-linux-x86_64.run` and `SHA256SUMS.txt` from [Releases](https://github.com/Hoyer360/lumen-linux/releases/tag/v0.1.0).
+Download `lumen-0.1.1-linux-x86_64.run` and `SHA256SUMS.txt` from [Releases](https://github.com/Hoyer360/lumen-linux/releases/latest).
 
 ```bash
 sha256sum --ignore-missing -c SHA256SUMS.txt
-chmod +x lumen-0.1.0-linux-x86_64.run
-./lumen-0.1.0-linux-x86_64.run
+chmod +x lumen-0.1.1-linux-x86_64.run
+./lumen-0.1.1-linux-x86_64.run
 ```
 
-The executable is a **self-extracting installer**, not a standalone bundled Python/Qt binary. It installs under `~/.local/share/lumen/app-0.1.0` (or `$XDG_DATA_HOME/lumen`), creates a Python virtual environment, downloads the pinned Python dependencies from PyPI, and launches Lumen. The first run requires internet. Run it as your normal user.
+The executable is a **self-extracting installer**, not a standalone bundled Python/Qt binary. It installs under `~/.local/share/lumen/app-0.1.1` (or `$XDG_DATA_HOME/lumen`), creates a Python virtual environment, downloads the pinned Python dependencies from PyPI, and launches Lumen. The first run requires internet. Run it as your normal user.
 
-For manual installation, extract `lumen-0.1.0-linux-x86_64.tar.gz` into an empty directory, or clone this repository:
+For manual installation, extract `lumen-0.1.1-linux-x86_64.tar.gz` into an empty directory, or clone this repository:
 
 ```bash
 git clone https://github.com/Hoyer360/lumen-linux.git
@@ -48,7 +48,7 @@ Arch Linux:
 sudo pacman -S --needed python python-pip pciutils usbutils util-linux dosfstools mtools polkit libxcb xcb-util-cursor xcb-util-image xcb-util-keysyms xcb-util-renderutil xcb-util-wm libxkbcommon-x11 mesa
 ```
 
-Ubuntu 24.04 CI and Arch/WSL2 development checks have passed. Other listed distributions are installation targets, not a claim of complete hardware validation. WSL can import target-machine reports, build EFI and export images; it cannot scan the physical target PC's firmware.
+Recommended distributions are Ubuntu 24.04/26.04, Debian 13, or current Arch Linux. WSL can import target-machine reports, build EFI and export images. Use native Linux to scan the target PC's firmware.
 
 ## USB access and ACPI
 
@@ -95,13 +95,14 @@ User data lives under `$XDG_DATA_HOME/lumen` (normally `~/.local/share/lumen`); 
 
 ## Validation
 
-- 92 Linux tests, including native ABI fixtures and actual FAT32 image round trips; GitHub CI passes on Ubuntu 24.04.
+- The Linux test suite covers native ABI fixtures, installer permissions, repeated helper launches, and FAT32 image round trips; GitHub CI passes on Ubuntu 24.04.
+- Native Ubuntu ACPI collection reads and validates 37 tables, including DSDT. The maker has passed maintainer acceptance testing.
 - Two real Intel/AMD hardware-report builds passed `ocvalidate` with zero issues.
 - Apple recovery was downloaded and signature/chunk verified. A 4 GiB exported image booted to the OpenCore recovery picker in QEMU/OVMF.
 - A Linux guest exercised actual block-device formatting, user writes, read-only verification and cleanup with 512/4096-byte sectors. Host physical disks were not used.
 - The original development tree ran 767 upstream tests, with 11 conditional skips. This curated repository carries the Linux suite and its C fixtures.
 
-See [detailed records](docs/LINUX-FEATURES.md) and [evidence](docs/verification). These checks do not establish physical USB, native firmware or macOS GPU compatibility.
+See [detailed records](docs/LINUX-FEATURES.md) and [evidence](docs/verification). Hardware and driver support follow the selected macOS version and the upstream components.
 
 ```bash
 .venv/bin/python -B -m unittest discover -s tests_linux -t . -v
@@ -120,4 +121,4 @@ The required original copyright notice is preserved. Lumen uses independent bran
 
 Lumen 是基于 1401 的非官方、非商业 Linux 移植版，提供中英文界面。请从 [Releases](https://github.com/Hoyer360/lumen-linux/releases) 下载 `.run` 可执行安装器或 `.tar.gz` 手动安装包。`.run` 首次运行会解压、创建 Python 环境并联网安装依赖，并非免依赖单文件程序。
 
-制作介质前需安装系统依赖、运行 `tools/fetch_assets.py` 获取原作者组件，以及安装受限 helper。物理 USB、原生 ACPI 和 macOS 安装仍需实机验收。完整中文步骤见 [README.zh-CN.md](README.zh-CN.md)。
+制作器已通过维护者使用验证，并以正式 Release 发布。制作介质前需安装系统依赖、运行 `tools/fetch_assets.py` 获取原作者组件，以及安装受限 helper。完整中文步骤见 [README.zh-CN.md](README.zh-CN.md)。
